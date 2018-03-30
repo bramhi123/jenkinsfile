@@ -62,8 +62,8 @@ node {
     {
     "files": [
         {
-            "pattern": "all/target/all-(*).war",
-            "target": "example-repo-local/"
+            "pattern": "all/target/all-(*).jar",
+            "target": "libs-release-local/"
         }
       ]
     }
