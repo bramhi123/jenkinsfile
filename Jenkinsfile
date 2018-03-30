@@ -16,7 +16,15 @@ node {
    
    }
  
-   
+   stage("SonarQube analysis") {
+          
+   withSonarQubeEnv('SonarQube') {
+                 
+   sh 'mvn sonar:sonar'
+              
+   }
+          
+  }
   
    stage ('Compile or build Stage') {
             
@@ -42,17 +50,6 @@ node {
    
    }  
 
-    
- 
-   stage("SonarQube analysis") {
-          
-   withSonarQubeEnv('SonarQube') {
-                 
-   sh 'mvn sonar:sonar'
-              
- }
-          
-}
       
   stage ('Distribute binaries to Jfrog Artifactory') { 
     def SERVER_ID = 'Jfrog' 
