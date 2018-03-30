@@ -49,6 +49,10 @@ node {
    sh 'mvn package'
    
    }  
+  
+   stage ('maven relasease') {
+    sh "${maven_bin} --settings ${maven_settings} -DreleaseVersion=${release_version} -DdevelopmentVersion=${development_version} release:prepare release:perform -B"
+ }
 
       
   stage ('Distribute binaries to Jfrog Artifactory') { 
