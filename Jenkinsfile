@@ -54,5 +54,25 @@ node {
           
 }
       
-      
+  stage ('Distribute binaries to Jfrog Artifactory') { 
+    def SERVER_ID = 'Jfrog' 
+    def server = Artifactory.server SERVER_ID
+    def uploadSpec = 
+    """
+    {
+    "files": [
+        {
+            "pattern": "all/target/all-(*).war",
+            "target": "example-repo-local/"
+        }
+      ]
+    }
+    """
+    def buildInfo = Artifactory.newBuildInfo() 
+    buildInfo.env.capture = true 
+    buildInfo=server.upload(uploadSpec) 
+    server.publishBuildInfo(buildInfo) 
+}    
+
+
 }
