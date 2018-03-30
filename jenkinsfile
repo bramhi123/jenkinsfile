@@ -12,7 +12,7 @@ node {
  
    stage ('scm') {
     
-   git 'git url'
+   git 'https://github.com/bramhi123/helloworld-java-mavenproject.git'
    
    }
  
@@ -54,28 +54,5 @@ node {
           
 }
       
-   
-
-   
-    stage ('Distribute binaries to Jfrog Artifactory') { 
-    def SERVER_ID = '1' 
-    def server = Artifactory.server SERVER_ID
-    def uploadSpec = 
-    """
-    {
-    "files": [
-        {
-            "pattern": "all/target/all-(*).war",
-            "target": "libs-snapshots-local/"
-        }
-      ]
-    }
-    """
-    def buildInfo = Artifactory.newBuildInfo() 
-    buildInfo.env.capture = true 
-    buildInfo=server.upload(uploadSpec) 
-    server.publishBuildInfo(buildInfo) 
-}
-
-
+      
 }
